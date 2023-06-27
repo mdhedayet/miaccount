@@ -36,17 +36,6 @@ class GroupResource extends JsonResource
             'account_heads_id' => $this->whenLoaded('accountHeads', function () {
                 return $this->accountHeads->pluck('id');
             }),
-            // //account heads in group
-            // 'account_heads_info' => $this->whenLoaded('accountHeads', function () {
-            //     return $this->accountHeads->map(function ($accountHead) {
-            //         return [
-            //             'id' => $accountHead->id,
-            //             'name' => $accountHead->name,
-            //             'total_amounts' => $accountHead->total_amounts,
-            //         ];
-            //     });
-
-            // }),
             'sub_groups' => GroupResource::collection($this->whenLoaded('subGroups')),
             'account_heads' => AccountHeadResource::collection($this->whenLoaded('accountHeads')),
             'child_groups' => GroupResource::collection($this->whenLoaded('childGroups')),
