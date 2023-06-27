@@ -14,6 +14,4 @@ use App\Http\Controllers\Api\V1\Account\AccountController;
 |
 */
 
-Route::get('/ass',[AccountController::class, 'accountHeadWithGroup']);
-
 Route::get('{any}', fn () => view('app'))->where('any', '^((?!api).)*');
