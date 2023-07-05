@@ -9,7 +9,7 @@
         </tr>
       </thead>
       <tbody>
-        <template v-for="(level_one, index) in totalAmountsReport" :key="index">
+        <template v-for="(level_one, index) in allTotalAmountsReport?.data" :key="index">
           <tr>
             <td class="px-6 py-4 whitespace-nowrap">{{ level_one?.name }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-end">{{ level_one?.total_amounts }}</td>
@@ -48,7 +48,32 @@
         </template>
       </tbody>
     </table>
+    <!-- pagination -->
+    <div class="flex justify-center items-center mt-4">
+      <div class="flex flex-col">
+        <div class="flex text-gray-700">
+          <div
+          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l cursor-pointer"
+          v-if="allTotalAmountsReport.meta?.current_page > 1"
+          @click="getTotalAmountsReport(allTotalAmountsReport.meta?.current_page - 1)"
+          >
+          Prev
+        </div>
+        <div class=" text-gray-800 font-bold py-2 px-4 mx-2">
+          Page {{ allTotalAmountsReport.meta?.current_page }} of {{ allTotalAmountsReport.meta?.last_page }}
+        </div>
+          <div
+            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r cursor-pointer"
+            v-if="allTotalAmountsReport.meta?.current_page < allTotalAmountsReport.meta?.last_page"
+            @click="getTotalAmountsReport(allTotalAmountsReport.meta?.current_page + 1)"
+          >
+            Next
+          </div>
+        </div>
+      </div>
   </div>
+  </div>
+
 </template>
 
 <script>
@@ -58,18 +83,18 @@ export default {
   components: { App },
   data() {
     return {
-      totalAmountsReport: [],
+      allTotalAmountsReport: [],
     }
   },
   mounted() {
     this.getTotalAmountsReport()
   },
   methods: {
-    getTotalAmountsReport() {
+    getTotalAmountsReport(page = 1) {
       axios
-        .get('api/v1/accounts/total-amounts-report')
+        .get('api/v1/accounts/total-amounts-report?page=' + page)
         .then((response) => {
-          this.totalAmountsReport = response.data.data
+          this.allTotalAmountsReport = response.data
         })
         .catch((error) => console.error(error))
     },

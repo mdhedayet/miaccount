@@ -15,10 +15,7 @@ use App\Http\Controllers\Api\V1\Account\AccountController;
 */
 
 Route::prefix('v1')->group(function () {
-    //total amounts  hierarchical view
     Route::get('/accounts/total-amounts-report'  , [AccountController::class, 'totalAmountsReport']);
-    //total amounts table view
     Route::get('/accounts/total-amounts-table-view'  , [AccountController::class, 'totalAmountsTableReport']);
-
     }
 );

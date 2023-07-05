@@ -16,7 +16,8 @@ class Group extends Model
     */
     public function accountHeads()
     {
-        return $this->hasMany(AccountHead::class)->withCount(['transactions as total_amounts' => function ($query) {
+        return $this->hasMany(AccountHead::class)
+        ->withCount(['transactions as total_amounts' => function ($query) {
             $query->select(DB::raw("SUM(debit) - SUM(credit) as total_amounts"));
         }]);
     }
@@ -26,7 +27,7 @@ class Group extends Model
     */
     public function subGroups()
     {
-        return $this->hasMany(Group::class, 'parent_id')->where('level', 2)->with(['childGroups', 'accountHeads']);
+        return $this->hasMany(Group::class, 'parent_id')->where('level', 2);
     }
 
     /*
@@ -34,7 +35,7 @@ class Group extends Model
     */
     public function childGroups()
     {
-        return $this->hasMany(Group::class, 'parent_id')->where('level', 3)->with(['accountHeads']);
+        return $this->hasMany(Group::class, 'parent_id')->where('level', 3);
     }
 
 }

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api\V1\Account;
 
 use App\Models\Group;
-use App\Models\AccountHead;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\GroupResource;
@@ -16,8 +14,26 @@ class AccountController extends Controller
     */
     public function totalAmountsReport()
     {
-        $result = Group::with(['subGroups','accountHeads'])->where('level', 1)->get();
-        return GroupResource::collection($result);
+        $data = Group::with(['subGroups'=>function($query){
+            $query->with(['childGroups'=>function($query){
+                $query->with(['accountHeads']);
+            },'accountHeads']);
+        },'accountHeads'])->where('level', 1)->paginate(2);
+
+        $data->data = $data->map(function($item){
+            $item->sub_groups = $item->subGroups?->map(function($subGroup){
+                $subGroup->child_groups = $subGroup->childGroups?->map(function($childGroup){
+                    $childGroup->total_amounts = $childGroup->accountHeads?->sum('total_amounts');
+                    return $childGroup;
+                });
+                $subGroup->total_amounts = $subGroup->accountHeads?->sum('total_amounts')+ $subGroup->child_groups?->sum('total_amounts');
+                return $subGroup;
+            });
+            $item->total_amounts = $item->accountHeads?->sum('total_amounts') + $item->sub_groups?->sum('total_amounts');
+            return $item;
+        });
+
+        return GroupResource::collection($data);
     }
 
     /*
