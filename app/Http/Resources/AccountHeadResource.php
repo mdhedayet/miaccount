@@ -15,10 +15,10 @@ class AccountHeadResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'group_id' => $this->group_id,
-            'total_amounts' => (int) $this->total_amounts,
+            'id'            => $this->id,
+            'name'          => $this->name,
+            'group_id'      => $this->group_id,
+            'total_amounts' => (int) $this->account_head_total_sum_total_amount,
         ];
     }
 }

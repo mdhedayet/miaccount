@@ -17171,7 +17171,8 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getTotalAmountsReport: function getTotalAmountsReport() {
       var _this = this;
-      axios__WEBPACK_IMPORTED_MODULE_0__["default"].get("api/v1/accounts/total-amounts-table-view").then(function (response) {
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('api/v1/accounts/total-amounts-table-view?page=' + page).then(function (response) {
         _this.totalAmountsReport = response.data;
       })["catch"](function (error) {
         return console.error(error);
@@ -17494,12 +17495,39 @@ var _hoisted_8 = {
 var _hoisted_9 = {
   "class": "px-6 py-4 text-right"
 };
+var _hoisted_10 = {
+  "class": "flex justify-center items-center mt-4"
+};
+var _hoisted_11 = {
+  "class": "flex flex-col"
+};
+var _hoisted_12 = {
+  "class": "flex text-gray-700"
+};
+var _hoisted_13 = {
+  "class": "text-gray-800 font-bold py-2 px-4 mx-2"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.totalAmountsReport, function (account_head, key) {
+  var _$data$totalAmountsRe, _$data$totalAmountsRe3, _$data$totalAmountsRe4, _$data$totalAmountsRe5, _$data$totalAmountsRe6;
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.totalAmountsReport.data, function (account_head, key) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: key
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(account_head.account_head_id), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(account_head.group_level_1), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(account_head.group_level_2), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(account_head.group_level_3), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(account_head.account_head_name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(account_head.total), 1 /* TEXT */)]);
-  }), 128 /* KEYED_FRAGMENT */))])])]);
+  }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" pagination "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [((_$data$totalAmountsRe = $data.totalAmountsReport.meta) === null || _$data$totalAmountsRe === void 0 ? void 0 : _$data$totalAmountsRe.current_page) > 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    key: 0,
+    "class": "bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l cursor-pointer",
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      var _$data$totalAmountsRe2;
+      return $options.getTotalAmountsReport(((_$data$totalAmountsRe2 = $data.totalAmountsReport.meta) === null || _$data$totalAmountsRe2 === void 0 ? void 0 : _$data$totalAmountsRe2.current_page) - 1);
+    })
+  }, " Prev ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, " Page " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$data$totalAmountsRe3 = $data.totalAmountsReport.meta) === null || _$data$totalAmountsRe3 === void 0 ? void 0 : _$data$totalAmountsRe3.current_page) + " of " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((_$data$totalAmountsRe4 = $data.totalAmountsReport.meta) === null || _$data$totalAmountsRe4 === void 0 ? void 0 : _$data$totalAmountsRe4.last_page), 1 /* TEXT */), ((_$data$totalAmountsRe5 = $data.totalAmountsReport.meta) === null || _$data$totalAmountsRe5 === void 0 ? void 0 : _$data$totalAmountsRe5.current_page) < ((_$data$totalAmountsRe6 = $data.totalAmountsReport.meta) === null || _$data$totalAmountsRe6 === void 0 ? void 0 : _$data$totalAmountsRe6.last_page) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    key: 1,
+    "class": "bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r cursor-pointer",
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      var _$data$totalAmountsRe7;
+      return $options.getTotalAmountsReport(((_$data$totalAmountsRe7 = $data.totalAmountsReport.meta) === null || _$data$totalAmountsRe7 === void 0 ? void 0 : _$data$totalAmountsRe7.current_page) + 1);
+    })
+  }, " Next ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])]);
 }
 
 /***/ }),

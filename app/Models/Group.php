@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\AccountHead;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -11,31 +10,27 @@ class Group extends Model
 {
     use HasFactory;
 
-    /*
-    *  This is a Group of Account Heads
-    */
+    /**
+     * Get the account heads associated with the group and calculate the sum of total_amount.
+     */
     public function accountHeads()
     {
-        return $this->hasMany(AccountHead::class)
-        ->withCount(['transactions as total_amounts' => function ($query) {
-            $query->select(DB::raw("SUM(debit) - SUM(credit) as total_amounts"));
-        }]);
+        return $this->hasMany(AccountHead::class)->withSum('accountHeadTotal', 'total_amount');
     }
 
-    /*
-    *   This is a Sub Group of a Group
-    */
+    /**
+     * Get the sub groups of the group with a level of 2.
+     */
     public function subGroups()
     {
         return $this->hasMany(Group::class, 'parent_id')->where('level', 2);
     }
 
-    /*
-    *   This is a Child Group of a Sub Group
-    */
+    /**
+     * Get the child groups of the sub group with a level of 3.
+     */
     public function childGroups()
     {
         return $this->hasMany(Group::class, 'parent_id')->where('level', 3);
     }
-
 }

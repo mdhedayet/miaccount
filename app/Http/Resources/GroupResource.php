@@ -16,14 +16,14 @@ class GroupResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'level' => $this->level,
-            'parent_id' => $this->parent_id,
+            'id'            => $this->id,
+            'name'          => $this->name,
+            'level'         => $this->level,
+            'parent_id'     => $this->parent_id,
             'total_amounts' => $this->total_amounts,
-            'sub_groups' => GroupResource::collection($this->whenLoaded('subGroups')),
+            'sub_groups'    => GroupResource::collection($this->whenLoaded('subGroups')),
             'account_heads' => AccountHeadResource::collection($this->whenLoaded('accountHeads')),
-            'child_groups' => GroupResource::collection($this->whenLoaded('childGroups')),
+            'child_groups'  => GroupResource::collection($this->whenLoaded('childGroups')),
         ];
     }
 }
